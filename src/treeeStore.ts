@@ -1,14 +1,3 @@
-const items = [
-    { id: 1, parent: 'root' },
-    { id: 2, parent: 1 },
-    { id: 3, parent: 1 },
-    { id: 4, parent: 2 },
-    { id: 5, parent: 2 },
-    { id: 6, parent: 2 },
-    { id: 7, parent: 4 },
-    { id: 8, parent: 4 },
-];
-
 type Id = number | string;
 
 interface TreeSource {
@@ -21,7 +10,7 @@ interface TreeStoreElem {
     children: Id[];
 }
 
-class TreeStore<T extends TreeSource> {
+export default class TreeStore<T extends TreeSource> {
     private store = new Map<Id, TreeStoreElem>();
 
     constructor(array: T[]) {
@@ -47,7 +36,7 @@ class TreeStore<T extends TreeSource> {
 
     getChildren(id: Id): TreeSource[] {
         return this.store.get(id)?.children
-            .map((childId) => this.store.get(childId)?.source);
+            .map((childId) => this.store.get(childId)?.source) || [];
     }
 
     getAllChildren(id: Id): TreeSource[] {
@@ -70,7 +59,7 @@ class TreeStore<T extends TreeSource> {
         const result: TreeSource[] = [];
         const parentId = this.store.get(id).source.parent;
         let current = this.store.get(parentId);
-        
+
         while (current){
             result.push(current.source);
             current = this.store.get(current.source.parent);
@@ -78,10 +67,3 @@ class TreeStore<T extends TreeSource> {
         return result;
     }
 }
-
-const ts = new TreeStore(items);
-console.log(ts.getAll());
-console.log(ts.getItem(4));
-console.log(ts.getChildren(2));
-console.log(ts.getAllChildren(2));
-console.log(ts.getAllParents(7))

@@ -4,9 +4,13 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "mocha dist/test/*.js"
     },
     "keywords": [],
-    "author": "kotoo8080",
-    "license": "ISC"
+    "author": "kotooo8080",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^20.11.22",
+        "mocha": "^10.3.0"
+    }
 }
