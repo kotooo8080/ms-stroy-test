@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "module": "NodeNext",
+      "esModuleInterop": true,
+      "target": "ES6",
+      "sourceMap": true,
+      "moduleResolution": "NodeNext",
+      "outDir": "dist",
+      "lib": ["ESNext", "DOM"]
+    }
+}
